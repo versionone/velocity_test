@@ -1,0 +1,59 @@
+{
+    "Options": {
+        "StartSequence": "Start",
+        "TerminateSequence": "Terminate"
+    },
+    "Sequences": [
+        {
+            "Description": "Simulates a Start Sequence",
+            "Icon": "46_48x48.png",
+            "Name": "Start",
+            "Options": {
+                "RunSequenceOnError": "Terminate",
+                "SetRunState": "running"
+            },
+            "Steps": [
+                {
+                    "Services": [
+                        {
+                            "Activity": "create",
+                            "DesiredState": "running",
+                            "InitialState": "start",
+                            "Name": "FakeServer",
+                            "RunLevel": 2,
+                            "Task": "FakeStart"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "Description": "Terminate all service instances",
+            "Icon": "45_48x48.png",
+            "Name": "Terminate",
+            "Options": {
+                "SetRunState": "stopped"
+            },
+            "Steps": [
+                {
+                    "Services": [
+                        {
+                            "Activity": "terminate",
+                            "DesiredState": "terminated",
+                            "InitialState": "stopping",
+                            "Name": "FakeServer",
+                            "RunLevel": 0,
+                            "Task": "FakeTerminate"
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "Services": [
+        {
+            "Description": "This service represents a fake server for tutorial purposes.",
+            "Name": "FakeServer"
+        }
+    ]
+}
